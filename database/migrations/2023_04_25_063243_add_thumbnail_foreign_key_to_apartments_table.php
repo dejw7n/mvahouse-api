@@ -10,15 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('user_tokens', function (Blueprint $table) {
-            $table->id();
+        Schema::table('apartments', function (Blueprint $table) {
             $table
-                ->foreignId('user_id')
-                ->constrained('users')
-                ->onDelete('cascade');
-            $table->text('token');
-            $table->datetime('expires_at');
-            $table->timestamps();
+                ->foreignId('thumbnail_id')
+                ->constrained('apartment_images')
+                ->after('apartment_type_id');
         });
     }
 
@@ -27,6 +23,9 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_tokens');
+        Schema::table('apartments', function (Blueprint $table) {
+            $table->dropForeign(['thumbnail_id']);
+            $table->dropColumn('thumbnail_id');
+        });
     }
 };

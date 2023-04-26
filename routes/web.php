@@ -19,6 +19,18 @@ $router->get('/', function () use ($router) {
 
 $router->group(['middleware' => 'auth', 'prefix' => 'api'], function ($router) {
     $router->get('me', 'AuthController@me');
+
+    $router->group(['prefix' => 'apartment'], function () use ($router) {
+        $router->get('', ['uses' => 'ApartmentController@showAllApartments']);
+
+        $router->get('/{id}', ['uses' => 'ApartmentController@showOneApartment']);
+
+        $router->post('', ['uses' => 'ApartmentController@create']);
+
+        $router->delete('/{id}', ['uses' => 'ApartmentController@delete']);
+
+        $router->put('/{id}', ['uses' => 'ApartmentController@update']);
+    });
 });
 
 $router->group(['prefix' => 'api'], function () use ($router) {

@@ -10,14 +10,15 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('user_tokens', function (Blueprint $table) {
+        Schema::create('apartments', function (Blueprint $table) {
             $table->id();
+            $table->integer('apartment_number');
             $table
-                ->foreignId('user_id')
-                ->constrained('users')
+                ->foreignId('apartment_type_id')
+                ->constrained('apartment_types')
                 ->onDelete('cascade');
-            $table->text('token');
-            $table->datetime('expires_at');
+            $table->integer('price_per_night');
+            $table->integer('max_guests');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_tokens');
+        Schema::dropIfExists('apartments');
     }
 };

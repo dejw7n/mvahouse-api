@@ -12,9 +12,9 @@ return new class extends Migration {
     {
         Schema::create('season_prices', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('start_date');
-            $table->timestamp('end_date');
-            $table->int('price_increase');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->integer('price_increase');
             $table->timestamps();
         });
     }

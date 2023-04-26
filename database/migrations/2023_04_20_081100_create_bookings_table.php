@@ -16,10 +16,10 @@ return new class extends Migration {
                 ->foreignId('apartment_id')
                 ->constrained('apartments')
                 ->onDelete('cascade');
-            $table->timestamp('check_in_date');
-            $table->timestamp('check_out_date');
-            $table->int('total_price');
-            $table->int('guests');
+            $table->date('check_in_date');
+            $table->date('check_out_date');
+            $table->integer('total_price');
+            $table->integer('guests');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone');
